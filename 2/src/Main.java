@@ -7,38 +7,43 @@ public class Main {
         ListNode pPre = null;
         ListNode pNext = null;
         while (head.next != null){
-
-            pNext = head.next;
-// 反转指向
-            head.next = pPre;
-// 指针往下移动
-            pPre = head;
-            head = pNext;
+           pNext = head.next;
+           head.next = pPre;
+           pPre = head;
+           head = pNext;
         }
-
+        head.next = pPre;
         return head;
     }
 
 
     void printList(ListNode last) {
         while (last != null) {
-            System.out.println(last.val + ",\n");
+            System.out.print(last.val + ",");
             last = last.next;
-
-
         }
-
-
     }
 
+    public ListNode getLastNode(ListNode node){
+        while (node.next != null) {
+            node = node.next;
+        }
+        return node;
+    }
 
     public static void main(String[] args) {
-        ListNode head = new ListNode(1);
-        head.next = new ListNode(4);
-        head.next.next = new ListNode(3);
-        head.next.next.next = new ListNode(2);
+        ListNode head1 = new ListNode(1);
+        head1.next = new ListNode(4);
+        head1.next.next = new ListNode(3);
+        head1.next.next.next = new ListNode(3);
+
+        ListNode head2 = new ListNode(1);
+        head2.next = new ListNode(4);
+        head2.next.next = new ListNode(3);
+        head2.next.next.next = new ListNode(2);
+
         Main s = new Main();
-        ListNode last = s.ReverseList(head);
+        ListNode last = s.addTwoNumbers(head1,head2);
         s.printList(last);
     }
 
@@ -48,25 +53,33 @@ public class Main {
 
 
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode listNode= new ListNode(0);
-        ListNode p = new ListNode(0);
-        p = listNode;
-        int sum = 0;
-        while (l1 != null || l2 != null || sum != 0) {
-            if (l1 != null) {
-                sum += l1.val;
+        ListNode res = new ListNode(0);
+        ListNode result = res;
+        int carry=0;
+        while (l1!=null || l2!=null){
+            int i=0,j=0;
+            if(l1!=null){
+                i=l1.val;
                 l1 = l1.next;
             }
-            if (l2 != null) {
-                sum += l2.val;
+            if(l2!=null){
+                j=l2.val;
                 l2 = l2.next;
             }
-            p.next = new ListNode(sum % 10);
-            sum = sum / 10;
-            p = p.next;
+            int sum = i+j+carry;
+            carry = sum / 10;
+            res.val = sum % 10;
+            if(l1!=null || l2!=null) {
+                res.next = new ListNode(0);
+                res = res.next;
+            }
         }
-        return listNode.next;
+        if (carry!=0){
+            res.next = new ListNode(carry);
+        }
+        return  result;
     }
+
 
 
 }
