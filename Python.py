@@ -1,5 +1,6 @@
-from _491._491 import Solution
+from _309._309 import Solution
 
 a = Solution()
-param = [10,10,10,10,10,10,10,10,10,10,10,10,10,10,10]
-print(a.findSubsequences(param))
+
+list = [3,1,3,0,2]
+print(a.maxProfit(list))
