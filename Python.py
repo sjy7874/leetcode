@@ -1,6 +1,6 @@
-from _309._309 import Solution
+from _122._122 import Solution
 
 a = Solution()
 
-list = [3,1,3,0,2]
+list = [3,2]
 print(a.maxProfit(list))
